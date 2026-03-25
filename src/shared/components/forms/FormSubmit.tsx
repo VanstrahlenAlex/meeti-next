@@ -1,11 +1,12 @@
-import { ButtonHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement>
+type Props = InputHTMLAttributes<HTMLInputElement>
 
 export default function FormSubmit(props: Props) {
   return (
-	<button {...props}>
-		{props.children}
-	</button>
+	<input
+	
+	{...props}
+	type="submit" className="bg-pink-600 w-full p-2 uppercase font-black text-white cursor-pointer hover:bg-pink-700 transition-colors mt-5" />
   )
 }
