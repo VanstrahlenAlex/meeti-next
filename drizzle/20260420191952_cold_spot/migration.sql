@@ -44,6 +44,11 @@ CREATE TABLE "verifications" (
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE "communities" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+	"name" varchar(255) NOT NULL
+);
+--> statement-breakpoint
 CREATE INDEX "accounts_userId_idx" ON "accounts" ("user_id");--> statement-breakpoint
 CREATE INDEX "sessions_userId_idx" ON "sessions" ("user_id");--> statement-breakpoint
 CREATE INDEX "verifications_identifier_idx" ON "verifications" ("identifier");--> statement-breakpoint

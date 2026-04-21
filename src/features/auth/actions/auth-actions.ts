@@ -9,9 +9,12 @@ export async function signUpAction(input : SignUpInput) {
 	if(!data.success) {
 		return {
 			message: 'Error al registrar el usuario',
-			error: data.error.issues
+			error: data.error.issues[0].message,
+			success: ''
 		}
 	}
 
-	await authService.register(data.data);
+	const response = await authService.register(data.data);
+
+	return response;
 }

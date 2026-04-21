@@ -1,3 +1,4 @@
+import { auth } from "@/src/lib/auth";
 import { SignUpInput } from "../schemas/authSchema";
 
 class AuthService {
@@ -9,6 +10,18 @@ class AuthService {
 		//Validación de negocio 
 
 		//Manejar el registro
+		await auth.api.signUpEmail({
+			body: {
+				name,
+				email,
+				password,
+			}
+		})
+
+		return {
+			error: '',
+			success: 'Cuenta creada correctamente, revisa tu e-mail para verificar tu cuenta'
+		}
 	}
 }
 
