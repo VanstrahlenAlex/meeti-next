@@ -7,6 +7,14 @@ export const BaseAuthSchema = z.object({
 	passwordConfirmation: z.string().trim().min(1, { error: 'La confirmación de la contraseña no puede ir vacío'})
 })
 
+//Login Schema
+
+export const SignInSchema = BaseAuthSchema.pick({
+	email: true
+}).extend({
+	password: z.string().trim().min(1, { error: 'La contraseña no puede ir vacío'})
+})
+
 
 export const SignUpSchema = BaseAuthSchema.pick({
 	name: true,
@@ -19,4 +27,7 @@ export const SignUpSchema = BaseAuthSchema.pick({
 } )
 
 
+
+
+export type SignInInput = z.infer<typeof SignInSchema>
 export type SignUpInput = z.infer<typeof SignUpSchema>
