@@ -11,7 +11,8 @@ export const auth = betterAuth({
 		schema: authSchema
 	}),
 	emailAndPassword: {
-		enabled: true
+		enabled: true,
+		requireEmailVerification: true
 	},
 	plugins: [nextCookies()]
 })
