@@ -1,6 +1,8 @@
 import { auth } from "@/src/lib/auth";
 import { SignInInput, SignUpInput } from "../schemas/authSchema";
 import { authRepository, IAuthRepository } from "./AuthRepository";
+import { APIError } from "better-auth";
+import { headers } from "next/headers";
 
 class AuthService {
 
@@ -47,6 +49,36 @@ class AuthService {
 		}
 
 		//Verificar su password y si confirmó su cuenta 
+		try {
+			await auth.api.signInEmail({
+				body: {
+					email,
+					password,
+					callbackURL: "/dashboard" //<-- A donde debe redirigirnos
+				},
+				headers: await headers()
+			})
+			return { 
+				error: '',
+				success: 'Inicio de sesión exitoso'
+			}
+		} catch (error) {
+			if(error instanceof  APIError){
+				const messages : Record<number, string> = {
+					401: 'Password Incorrecto',
+				}
+
+				const errorMessage = messages[error.statusCode]
+				if(errorMessage){
+					return {
+						error: errorMessage,
+						success: ''
+					}
+				}
+
+				
+			}
+		}
 		return {
 			error: '',
 			success: ''
