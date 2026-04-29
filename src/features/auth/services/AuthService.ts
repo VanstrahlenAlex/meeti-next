@@ -28,7 +28,9 @@ class AuthService {
 				name,
 				email,
 				password,
-			}
+				callbackURL: "/dashboard" //<-- A donde debe redirigirnos
+			},
+			headers: await headers()
 		})
 
 		return {

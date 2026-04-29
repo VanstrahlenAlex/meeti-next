@@ -5,9 +5,9 @@ import { Form, FormError, FormInput, FormLabel, FormSubmit } from "@/src/shared/
 import { SignInInput, SignInSchema } from "../schemas/authSchema";
 import { signInAction } from "../actions/auth-actions";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 export default function LoginForm() {
-
 	const {register, handleSubmit, formState: {errors}} = useForm({
 		resolver: zodResolver(SignInSchema),
 		mode: 'all'
@@ -22,6 +22,7 @@ export default function LoginForm() {
 
 		if(success){
 			toast.success(success)
+			redirect("/dashboard")
 		}
 		
 	}
