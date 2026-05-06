@@ -1,6 +1,6 @@
 "use server";
 
-import { SignInInput, SignInSchema, SignUpInput, SignUpSchema } from "../schemas/authSchema";
+import { ForgotPasswordInput, ForgotPasswordSchema, SignInInput, SignInSchema, SignUpInput, SignUpSchema } from "../schemas/authSchema";
 import { authService } from "../services/AuthService";
 
 export async function signUpAction(input : SignUpInput) {
@@ -31,6 +31,22 @@ export async function signInAction(input: SignInInput) {
 	}
 
 	const response = await authService.login(data.data);
+
+	return response;
+}; 
+
+export async function forgotPasswordAction(input : ForgotPasswordInput) {
+	const data = ForgotPasswordSchema.safeParse(input);
+
+	if(!data.success) {
+		return {
+			message: 'Error al registrar el usuario',
+			error: data.error.issues[0].message,
+			success: ''
+		}
+	}
+
+	const response = await authService.requestPasswordReset(data.data)
 
 	return response;
 }
