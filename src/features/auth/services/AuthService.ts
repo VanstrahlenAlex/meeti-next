@@ -97,6 +97,15 @@ class AuthService {
 			}
 		}
 
+		const { email } = input;
+		await auth.api.requestPasswordReset({
+			body: {
+				email,
+				callbackURL: "/dashboard"
+			},
+			headers: await headers()
+		})
+
 		return {
 			error: '',
 			success: '',
